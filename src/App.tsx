@@ -17,7 +17,6 @@ function App() {
     const [lists, setListsState] = useState<ILists>(getLists());
 
     useEffect(() => {
-        createLists();
         const getGenres = async () => getData();
         if (!localStorage.getItem('Genres')) {
             getGenres();

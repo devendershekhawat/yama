@@ -2,14 +2,13 @@ import { message } from 'antd';
 import ILists from '~/Models/ILists';
 import IMovie, { ListName } from '~/Models/IMovie';
 
-export function createLists(): void {
-    if (localStorage.getItem('Lists') === null) {
-        const lists = {
-            watched: [],
-            wantToWatch: [],
-        };
-        localStorage.setItem('Lists', JSON.stringify(lists));
-    }
+export function createLists(): ILists {
+    const lists: ILists = {
+        watched: [],
+        wantToWatch: [],
+    };
+    localStorage.setItem('Lists', JSON.stringify(lists));
+    return lists;
 }
 
 export function setLists(lists: ILists) {
@@ -18,6 +17,7 @@ export function setLists(lists: ILists) {
 
 export function getLists(): ILists {
     const listStringified = localStorage.getItem('Lists');
+    if (!listStringified) return createLists();
     return JSON.parse(listStringified as string) as ILists;
 }
 
